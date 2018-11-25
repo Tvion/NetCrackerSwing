@@ -89,7 +89,7 @@ public class BookModel extends AbstractTableModel {
                 printWriter.println(" " + "</email>");
 
                 printWriter.print(tab(tabs) + "<gender>");
-                printWriter.print(" " + book.getAuthor().getName());
+                printWriter.print(" " + book.getAuthor().getGender());
                 printWriter.println(" " + "</gender>");
                 tabs--;
                 printWriter.println(tab(tabs) + "</author>");
