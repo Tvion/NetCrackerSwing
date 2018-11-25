@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 
 public class BookModel extends AbstractTableModel {
-    private final int TAB_COUNT=2;
+    private final int TAB_COUNT = 2;
 
     private List<Book> books = new ArrayList<>();
     File source = new File("Books.xml");
@@ -25,10 +25,6 @@ public class BookModel extends AbstractTableModel {
         } catch (IOException e) {
             e.printStackTrace();
         }
-//        for(int i=0;i<50;i++){
-//            addBook(new Book("Book "+i,2,2+Math.random()*10 ,new Author("sdf "+i,"ghfg@email.ru","f")));
-//        }
-//        books.add(new Book("123", 100, 10.5, new Author("456", "789", "m")));
     }
 
     public void addBook(Book b) {
@@ -37,18 +33,18 @@ public class BookModel extends AbstractTableModel {
         fireTableDataChanged();
     }
 
-    public Book getBook(int index){
+    public Book getBook(int index) {
         return books.get(index);
     }
 
-    public void setBook(int index,Book book){
-        books.set(index,book);
+    public void setBook(int index, Book book) {
+        books.set(index, book);
         saveChanges();
         fireTableDataChanged();
     }
 
     public void removeBooks(int[] booksNumbers) {
-        ArrayList<Book> selectedBooks=new ArrayList<>();
+        ArrayList<Book> selectedBooks = new ArrayList<>();
         for (int i : booksNumbers)
             selectedBooks.add(books.get(i));
         books.removeAll(selectedBooks);
@@ -71,30 +67,30 @@ public class BookModel extends AbstractTableModel {
                 printWriter.println(tab(tabs) + "<book>");
                 tabs++;
                 printWriter.print(tab(tabs) + "<name>");
-                printWriter.print(" "+book.getName());
-                printWriter.println(" "+"</name>");
+                printWriter.print(" " + book.getName());
+                printWriter.println(" " + "</name>");
 
                 printWriter.print(tab(tabs) + "<quantity>");
-                printWriter.print(" "+book.getQty());
-                printWriter.println(" "+"</quantity>");
+                printWriter.print(" " + book.getQty());
+                printWriter.println(" " + "</quantity>");
 
                 printWriter.print(tab(tabs) + "<price>");
-                printWriter.print(" "+book.getPrice());
-                printWriter.println(" "+"</price>");
+                printWriter.print(" " + book.getPrice());
+                printWriter.println(" " + "</price>");
 
                 printWriter.println(tab(tabs) + "<author>");
                 tabs++;
                 printWriter.print(tab(tabs) + "<name>");
-                printWriter.print(" "+book.getAuthor().getName());
-                printWriter.println(" "+"</name>");
+                printWriter.print(" " + book.getAuthor().getName());
+                printWriter.println(" " + "</name>");
 
                 printWriter.print(tab(tabs) + "<email>");
-                printWriter.print(" "+book.getAuthor().getEmail());
-                printWriter.println(" "+"</email>");
+                printWriter.print(" " + book.getAuthor().getEmail());
+                printWriter.println(" " + "</email>");
 
                 printWriter.print(tab(tabs) + "<gender>");
-                printWriter.print(" "+book.getAuthor().getName());
-                printWriter.println(" "+"</gender>");
+                printWriter.print(" " + book.getAuthor().getName());
+                printWriter.println(" " + "</gender>");
                 tabs--;
                 printWriter.println(tab(tabs) + "</author>");
                 tabs--;
@@ -118,14 +114,14 @@ public class BookModel extends AbstractTableModel {
             String authorEmail;
             String authorGender;
             if (scanner.nextLine().equals("  <book>")) {
-                name=scanner.nextLine().split(" ")[TAB_COUNT*2+1];
-                quantity=Integer.parseInt(scanner.nextLine().split(" ")[TAB_COUNT*2+1]);
-                price=Double.parseDouble(scanner.nextLine().split(" ")[TAB_COUNT*2+1]);
+                name = scanner.nextLine().split(" ")[TAB_COUNT * 2 + 1];
+                quantity = Integer.parseInt(scanner.nextLine().split(" ")[TAB_COUNT * 2 + 1]);
+                price = Double.parseDouble(scanner.nextLine().split(" ")[TAB_COUNT * 2 + 1]);
                 scanner.nextLine();
-                authorName=scanner.nextLine().split(" ")[TAB_COUNT*3+1];
-                authorEmail=scanner.nextLine().split(" ")[TAB_COUNT*3+1];
-                authorGender=scanner.nextLine().split(" ")[TAB_COUNT*3+1];
-                books.add(new Book(name,quantity,price,new Author(authorName,authorEmail,authorGender)));
+                authorName = scanner.nextLine().split(" ")[TAB_COUNT * 3 + 1];
+                authorEmail = scanner.nextLine().split(" ")[TAB_COUNT * 3 + 1];
+                authorGender = scanner.nextLine().split(" ")[TAB_COUNT * 3 + 1];
+                books.add(new Book(name, quantity, price, new Author(authorName, authorEmail, authorGender)));
             }
         }
         fireTableDataChanged();

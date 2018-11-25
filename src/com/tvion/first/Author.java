@@ -28,9 +28,9 @@ public class Author {
 
     @Override
     public String toString() {
-        return  "name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                ", gender='" + gender + '\'';
+        return "Name='" + name + '\'' +
+                ", Email='" + email + '\'' +
+                ", Gender='" + gender + '\'';
     }
 
     @Override
