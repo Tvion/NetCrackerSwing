@@ -1,13 +1,33 @@
 <?xml version="1.0" ?>
 <books>
   <book>
-    <name> asd </name>
-    <quantity> 3 </quantity>
-    <price> 10.2 </price>
+    <name> MyBook </name>
+    <quantity> 5 </quantity>
+    <price> 10.5 </price>
     <author>
-      <name> sad </name>
-      <email> asd@sdsd.ru </email>
-      <gender> sad </gender>
+      <name> OnlyMe </name>
+      <email> snakersu@gmail.com </email>
+      <gender> OnlyMe </gender>
+    </author>
+  </book>
+  <book>
+    <name> SecondBook </name>
+    <quantity> 7 </quantity>
+    <price> 100.35 </price>
+    <author>
+      <name> Meetoo </name>
+      <email> sdsd@sd.ru </email>
+      <gender> Meetoo </gender>
+    </author>
+  </book>
+  <book>
+    <name> ThirdBook </name>
+    <quantity> 1 </quantity>
+    <price> 30.0 </price>
+    <author>
+      <name> Some </name>
+      <email> some@mail.com </email>
+      <gender> Some </gender>
     </author>
   </book>
 </books>
