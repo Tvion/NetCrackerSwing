@@ -14,6 +14,7 @@ public class BookModel extends AbstractTableModel {
     private final int TAB_COUNT = 2;
 
     private List<Book> books = new ArrayList<>();
+
     File source = new File("Books.xml");
 
     public BookModel() {
@@ -29,7 +30,7 @@ public class BookModel extends AbstractTableModel {
 
     public void addBook(Book b) {
         books.add(b);
-        saveChanges();
+//        saveChanges();
         fireTableDataChanged();
     }
 
@@ -39,8 +40,21 @@ public class BookModel extends AbstractTableModel {
 
     public void setBook(int index, Book book) {
         books.set(index, book);
-        saveChanges();
+//        saveChanges();
         fireTableDataChanged();
+    }
+
+    public void setSource(File source) throws FileNotFoundException {
+        this.source = source;
+        books.clear();
+        parseSource();
+    }
+
+    public void saveChangesAs(File newFile) throws FileNotFoundException {
+        source = newFile;
+        saveChanges();
+        books.clear();
+        parseSource();
     }
 
     public void removeBooks(int[] booksNumbers) {
@@ -48,7 +62,7 @@ public class BookModel extends AbstractTableModel {
         for (int i : booksNumbers)
             selectedBooks.add(books.get(i));
         books.removeAll(selectedBooks);
-        saveChanges();
+//        saveChanges();
         fireTableDataChanged();
     }
 
