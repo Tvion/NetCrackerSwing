@@ -7,7 +7,7 @@
     <author>
       <name> OnlyMe </name>
       <email> snakersu@gmail.com </email>
-      <gender> OnlyMe </gender>
+      <gender> m </gender>
     </author>
   </book>
   <book>
@@ -17,7 +17,7 @@
     <author>
       <name> Meetoo </name>
       <email> sdsd@sd.ru </email>
-      <gender> Meetoo </gender>
+      <gender> m </gender>
     </author>
   </book>
   <book>
@@ -27,7 +27,7 @@
     <author>
       <name> Some </name>
       <email> some@mail.com </email>
-      <gender> Some </gender>
+      <gender> f </gender>
     </author>
   </book>
 </books>
