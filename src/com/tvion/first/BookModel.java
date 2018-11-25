@@ -59,7 +59,7 @@ public class BookModel extends AbstractTableModel {
             }
             source.createNewFile();
 
-            printWriter.println("<?xml version=\"1.0\" ?>");
+            printWriter.println("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>");
             printWriter.println("<books>");
             books.forEach((book) -> {
                 int tabs = 0;

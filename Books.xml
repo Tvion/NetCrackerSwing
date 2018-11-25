@@ -1,4 +1,4 @@
-<?xml version="1.0" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <books>
   <book>
     <name> MyBook </name>
@@ -13,7 +13,7 @@
   <book>
     <name> SecondBook </name>
     <quantity> 7 </quantity>
-    <price> 100.35 </price>
+    <price> 100.36 </price>
     <author>
       <name> Meetoo </name>
       <email> sdsd@sd.ru </email>
