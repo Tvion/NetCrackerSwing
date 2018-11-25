@@ -30,7 +30,6 @@ public class BookModel extends AbstractTableModel {
 
     public void addBook(Book b) {
         books.add(b);
-//        saveChanges();
         fireTableDataChanged();
     }
 
@@ -40,7 +39,6 @@ public class BookModel extends AbstractTableModel {
 
     public void setBook(int index, Book book) {
         books.set(index, book);
-//        saveChanges();
         fireTableDataChanged();
     }
 
@@ -48,6 +46,7 @@ public class BookModel extends AbstractTableModel {
         this.source = source;
         books.clear();
         parseSource();
+        fireTableDataChanged();
     }
 
     public void saveChangesAs(File newFile) throws FileNotFoundException {
@@ -62,7 +61,6 @@ public class BookModel extends AbstractTableModel {
         for (int i : booksNumbers)
             selectedBooks.add(books.get(i));
         books.removeAll(selectedBooks);
-//        saveChanges();
         fireTableDataChanged();
     }
 
