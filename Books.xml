@@ -1,0 +1,13 @@
+<?xml version="1.0" ?>
+<books>
+  <book>
+    <name> asd </name>
+    <quantity> 3 </quantity>
+    <price> 10.2 </price>
+    <author>
+      <name> sad </name>
+      <email> asd@sdsd.ru </email>
+      <gender> sad </gender>
+    </author>
+  </book>
+</books>
