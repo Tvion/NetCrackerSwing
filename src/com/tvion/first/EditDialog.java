@@ -6,7 +6,7 @@ import java.awt.*;
 public class EditDialog extends JDialog {
     EditDialog(JFrame frame, BookModel model, int selectedRow) {
         super(frame, "Adding Book");
-        setSize(350, 250);
+        setSize(250, 250);
         setLocation(400, 300);
         setDefaultCloseOperation(HIDE_ON_CLOSE);
         setModal(true);
