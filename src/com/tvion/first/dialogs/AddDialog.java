@@ -92,8 +92,8 @@ public class AddDialog extends JDialog {
 
     public static boolean verifyValues(JDialog dialog, String[] values) {
 
-        Pattern name = Pattern.compile("^[a-zA-Z0-9\\s]{3,25}$");
-        Pattern nameAuthor = Pattern.compile("^[a-zA-Z\\s]{3,25}");
+        Pattern name = Pattern.compile("^[a-zA-Z0-9]{3,25}$");
+        Pattern nameAuthor = Pattern.compile("^[a-zA-Z]{3,25}");
         Pattern num = Pattern.compile("^[0-9]{1,10000000}$");
         Pattern price = Pattern.compile("^[0-9]{1,10000000}+\\.[0-9]{1,10000000}$");
         Pattern email = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);

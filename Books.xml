@@ -35,7 +35,7 @@
     <quantity> 4 </quantity>
     <price> 675.0 </price>
     <author>
-      <name> George Orwell </name>
+      <name> George </name>
       <email> g-orw@mail.ru </email>
       <gender> Male </gender>
     </author>
@@ -45,7 +45,7 @@
     <quantity> 6 </quantity>
     <price> 500.5 </price>
     <author>
-      <name> Alan Karr </name>
+      <name> Alan </name>
       <email> alKar@gmail.ru </email>
       <gender> Male </gender>
     </author>
