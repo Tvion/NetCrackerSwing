@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<books>
+  <book>
+    <name> My Book </name>
+    <quantity> 50 </quantity>
+    <price> 1000.5 </price>
+    <author>
+      <name> Only Me </name>
+      <email> snakersu@gmail.com </email>
+      <gender> Male </gender>
+    </author>
+  </book>
+  <book>
+    <name> New Table Book </name>
+    <quantity> 9 </quantity>
+    <price> 10.36 </price>
+    <author>
+      <name> Me and me </name>
+      <email> sdsasdd@sd.ru </email>
+      <gender> Male </gender>
+    </author>
+  </book>
+</books>

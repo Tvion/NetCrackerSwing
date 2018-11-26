@@ -13,7 +13,7 @@ public class EditDialog extends JDialog {
 
     public EditDialog(JFrame frame, BookModel model, int selectedRow) {
         super(frame, "Editing Book");
-        setSize(300, 270);
+        setSize(260, 270);
         setLocation(400, 300);
         setDefaultCloseOperation(HIDE_ON_CLOSE);
         setModal(true);
@@ -29,27 +29,27 @@ public class EditDialog extends JDialog {
         JTextField authorEmail = new JTextField(author.getEmail());
         JTextField price = new JTextField(String.valueOf(selectedBook.getPrice()));
         JTextField count = new JTextField(String.valueOf(selectedBook.getQty()));
-        JRadioButton genderMaleButton = new JRadioButton();
-        JRadioButton genderFemaleButton = new JRadioButton();
+
+        Box radioBox = Box.createHorizontalBox();
+        JRadioButton genderMaleButton = new JRadioButton("Male");
+        JRadioButton genderFemaleButton = new JRadioButton("Female");
+
         JLabel nameL = new JLabel("Name");
         JLabel authorsNameL = new JLabel("Author's Name");
         JLabel authorEmailL = new JLabel("Author's Email");
         JLabel authorGenderL = new JLabel("Authors Gender");
         JLabel priceL = new JLabel("Price");
         JLabel countL = new JLabel("Count");
-        JLabel maleL = new JLabel("Male");
-        JLabel femaleL = new JLabel("Female");
+
         JButton addButton = new JButton("Edit");
         JButton cancelButton = new JButton("Cancel");
 
-        JPanel buttonsPanel = new JPanel();
         ButtonGroup bg = new ButtonGroup();
         bg.add(genderFemaleButton);
         bg.add(genderMaleButton);
-        buttonsPanel.add(genderMaleButton);
-        buttonsPanel.add(maleL);
-        buttonsPanel.add(genderFemaleButton);
-        buttonsPanel.add(femaleL);
+
+        radioBox.add(genderMaleButton);
+        radioBox.add(genderFemaleButton);
 
         panel.add(nameL);
         panel.add(name);
@@ -58,7 +58,7 @@ public class EditDialog extends JDialog {
         panel.add(authorEmailL);
         panel.add(authorEmail);
         panel.add(authorGenderL);
-        panel.add(buttonsPanel);
+        panel.add(radioBox);
         panel.add(priceL);
         panel.add(price);
         panel.add(countL);
@@ -76,13 +76,9 @@ public class EditDialog extends JDialog {
             genderMaleButton.setSelected(true);
         }
 
-        genderFemaleButton.addActionListener((event) -> {
-            authorGender = "Female";
-        });
+        genderFemaleButton.addActionListener((event) -> authorGender = "Female");
 
-        genderMaleButton.addActionListener((event) -> {
-            authorGender = "Male";
-        });
+        genderMaleButton.addActionListener((event) -> authorGender = "Male");
 
         addButton.addActionListener((event) -> {
             String[] values = {name.getText(), count.getText(), price.getText(), authorName.getText(), authorEmail.getText(), authorGender};

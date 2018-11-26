@@ -15,7 +15,7 @@ public class AddDialog extends JDialog {
 
     public AddDialog(JFrame frame, BookModel model) {
         super(frame, "Adding Book");
-        setSize(300, 270);
+        setSize(260, 270);
         setLocation(400, 300);
         setDefaultCloseOperation(HIDE_ON_CLOSE);
         setModal(true);
@@ -23,32 +23,33 @@ public class AddDialog extends JDialog {
 
         JPanel panel = new JPanel(new GridLayout(0, 2, 10, 10));
         JPanel buttons = new JPanel();
-        JTextField name = new JTextField(1);
-        JTextField authorName = new JTextField(1);
-        JTextField authorEmail = new JTextField(1);
-        JTextField price = new JTextField(1);
-        JTextField count = new JTextField(1);
-        JRadioButton genderMaleButton = new JRadioButton();
-        JRadioButton genderFemaleButton = new JRadioButton();
+        JTextField name = new JTextField();
+        JTextField authorName = new JTextField();
+        JTextField authorEmail = new JTextField();
+        JTextField price = new JTextField();
+        JTextField count = new JTextField();
+
+        Box radioBox = Box.createHorizontalBox();
+        JRadioButton genderMaleButton = new JRadioButton("Male");
+        JRadioButton genderFemaleButton = new JRadioButton("Female");
+
         JLabel nameL = new JLabel("Name");
         JLabel authorsNameL = new JLabel("Author's Name");
         JLabel authorEmailL = new JLabel("Author's Email");
         JLabel authorGenderL = new JLabel("Authors Gender");
         JLabel priceL = new JLabel("Price");
         JLabel countL = new JLabel("Count");
-        JLabel maleL = new JLabel("Male");
-        JLabel femaleL = new JLabel("Female");
+
         JButton addButton = new JButton("Add");
         JButton cancelButton = new JButton("Cancel");
 
-        JPanel radiusPanel = new JPanel();
         ButtonGroup bg = new ButtonGroup();
         bg.add(genderFemaleButton);
         bg.add(genderMaleButton);
-        radiusPanel.add(genderMaleButton);
-        radiusPanel.add(maleL);
-        radiusPanel.add(genderFemaleButton);
-        radiusPanel.add(femaleL);
+
+        radioBox.add(genderMaleButton);
+        radioBox.add(genderFemaleButton);
+
 
         panel.add(nameL);
         panel.add(name);
@@ -57,7 +58,7 @@ public class AddDialog extends JDialog {
         panel.add(authorEmailL);
         panel.add(authorEmail);
         panel.add(authorGenderL);
-        panel.add(radiusPanel);
+        panel.add(radioBox);
         panel.add(priceL);
         panel.add(price);
         panel.add(countL);
