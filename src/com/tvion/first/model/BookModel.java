@@ -1,4 +1,7 @@
-package com.tvion.first;
+package com.tvion.first.model;
+
+import com.tvion.first.entities.Author;
+import com.tvion.first.entities.Book;
 
 import javax.swing.table.AbstractTableModel;
 import java.io.File;
@@ -154,7 +157,7 @@ public class BookModel extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return 4;
+        return 6;
     }
 
     @Override
@@ -164,10 +167,14 @@ public class BookModel extends AbstractTableModel {
             case 0:
                 return cur.getName();
             case 1:
-                return cur.getAuthor().toString();
+                return cur.getAuthor().getName();
             case 2:
-                return cur.getPrice();
+                return cur.getAuthor().getGender();
             case 3:
+                return cur.getAuthor().getEmail();
+            case 4:
+                return cur.getPrice();
+            case 5:
                 return cur.getQty();
         }
         return null;
@@ -178,10 +185,14 @@ public class BookModel extends AbstractTableModel {
             case 0:
                 return "Book name";
             case 1:
-                return "Author";
+                return "Author's Name";
             case 2:
-                return "Price";
+                return "Author's Gender";
             case 3:
+                return "Author's Email";
+            case 4:
+                return "Price";
+            case 5:
                 return "Count";
         }
         return "";
@@ -194,8 +205,12 @@ public class BookModel extends AbstractTableModel {
             case 1:
                 return String.class;
             case 2:
-                return Double.class;
+                return String.class;
             case 3:
+                return String.class;
+            case 4:
+                return Double.class;
+            case 5:
                 return Integer.class;
         }
         return Object.class;

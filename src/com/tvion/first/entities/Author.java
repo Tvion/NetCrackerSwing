@@ -1,4 +1,4 @@
-package com.tvion.first;
+package com.tvion.first.entities;
 
 import java.util.Objects;
 
@@ -28,9 +28,8 @@ public class Author {
 
     @Override
     public String toString() {
-        return "Name='" + name + '\'' +
-                ", Email='" + email + '\'' +
-                ", Gender='" + gender + '\'';
+        return name + ", " + gender +
+                " email is " + email;
     }
 
     @Override

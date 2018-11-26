@@ -1,5 +1,10 @@
 package com.tvion.first;
 
+import com.tvion.first.dialogs.AddDialog;
+import com.tvion.first.dialogs.EditDialog;
+import com.tvion.first.dialogs.RemoveDialog;
+import com.tvion.first.model.BookModel;
+
 import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
 import java.awt.*;
@@ -34,7 +39,11 @@ public class Swing extends JFrame {
         deleteButton.setEnabled(false);
         editButton.setEnabled(false);
 
-        table.getColumnModel().getColumn(1).setMinWidth(250);
+
+        table.getColumnModel().getColumn(3).setPreferredWidth(130);
+        table.getColumnModel().getColumn(4).setPreferredWidth(30);
+        table.getColumnModel().getColumn(5).setPreferredWidth(30);
+
 
         addButton.addActionListener((event) -> {
             JDialog add = new AddDialog(this, m);
@@ -128,6 +137,8 @@ public class Swing extends JFrame {
         save.addActionListener((event) -> {
             m.saveChanges();
         });
+
+
         fileMenu.add(open);
         fileMenu.add(save);
         fileMenu.add(saveAs);
