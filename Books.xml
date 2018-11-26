@@ -31,23 +31,23 @@
     </author>
   </book>
   <book>
-    <name> hjvfgh </name>
+    <name> 1984 </name>
     <quantity> 4 </quantity>
-    <price> 1.0 </price>
+    <price> 675.0 </price>
     <author>
-      <name> gbnv </name>
-      <email> asda@mail.ru </email>
+      <name> George Orwell </name>
+      <email> g-orw@mail.ru </email>
       <gender> Male </gender>
     </author>
   </book>
   <book>
-    <name> sad </name>
+    <name> Stop smoking </name>
     <quantity> 6 </quantity>
-    <price> 3.0 </price>
+    <price> 500.5 </price>
     <author>
-      <name> hjvsdghf </name>
-      <email> saf@sfd.ru </email>
-      <gender> Female </gender>
+      <name> Alan Karr </name>
+      <email> alKar@gmail.ru </email>
+      <gender> Male </gender>
     </author>
   </book>
 </books>
