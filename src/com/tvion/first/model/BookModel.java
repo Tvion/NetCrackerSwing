@@ -58,7 +58,7 @@ public class BookModel extends AbstractTableModel {
         fireTableDataChanged();
     }
 
-    public void setSource(File source) throws FileNotFoundException {
+    public void setSource(File source){
         this.source = source;
         books.clear();
         parseSource();
@@ -66,7 +66,7 @@ public class BookModel extends AbstractTableModel {
         fireTableDataChanged();
     }
 
-    public void saveChangesAs(File newFile) throws FileNotFoundException {
+    public void saveChangesAs(File newFile){
         source = newFile;
         saveChanges();
         books.clear();
@@ -136,25 +136,28 @@ public class BookModel extends AbstractTableModel {
         }
     }
 
-    private void parseSource() throws FileNotFoundException {
-        Scanner scanner = new Scanner(source);
-        while (scanner.hasNextLine()) {
-            String name;
-            int quantity;
-            double price;
-            String authorName;
-            String authorEmail;
-            String authorGender;
-            if (scanner.nextLine().equals("  <book>")) {
-                name = getNames(scanner.nextLine(), TAB_COUNT * 2 + 1);
-                quantity = Integer.parseInt(scanner.nextLine().split(" ")[TAB_COUNT * 2 + 1]);
-                price = Double.parseDouble(scanner.nextLine().split(" ")[TAB_COUNT * 2 + 1]);
-                scanner.nextLine();
-                authorName = getNames(scanner.nextLine(), TAB_COUNT * 3 + 1);
-                authorEmail = scanner.nextLine().split(" ")[TAB_COUNT * 3 + 1];
-                authorGender = scanner.nextLine().split(" ")[TAB_COUNT * 3 + 1];
-                books.add(new Book(name, quantity, price, new Author(authorName, authorEmail, authorGender)));
+    private void parseSource() {
+        try (Scanner scanner = new Scanner(source)) {
+            while (scanner.hasNextLine()) {
+                String name;
+                int quantity;
+                double price;
+                String authorName;
+                String authorEmail;
+                String authorGender;
+                if (scanner.nextLine().equals("  <book>")) {
+                    name = getNames(scanner.nextLine(), TAB_COUNT * 2 + 1);
+                    quantity = Integer.parseInt(scanner.nextLine().split(" ")[TAB_COUNT * 2 + 1]);
+                    price = Double.parseDouble(scanner.nextLine().split(" ")[TAB_COUNT * 2 + 1]);
+                    scanner.nextLine();
+                    authorName = getNames(scanner.nextLine(), TAB_COUNT * 3 + 1);
+                    authorEmail = scanner.nextLine().split(" ")[TAB_COUNT * 3 + 1];
+                    authorGender = scanner.nextLine().split(" ")[TAB_COUNT * 3 + 1];
+                    books.add(new Book(name, quantity, price, new Author(authorName, authorEmail, authorGender)));
+                }
             }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
         }
         fireTableDataChanged();
     }

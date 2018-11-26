@@ -129,12 +129,8 @@ public class Swing extends JFrame {
 
             int state = fileOpener.showDialog(this, "Open File");
             if (state == JFileChooser.APPROVE_OPTION) {
-                try {
-                    File file = fileOpener.getSelectedFile();
-                    m.setSource(file);
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                }
+                File file = fileOpener.getSelectedFile();
+                m.setSource(file);
             }
         });
 
@@ -205,7 +201,7 @@ public class Swing extends JFrame {
             if ("[Autosave]".equals(sub)) {
                 break;
             }
-            result.append(sub + " ");
+            result.append(sub).append(" ");
         }
         return result.toString().trim();
     }
