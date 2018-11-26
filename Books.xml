@@ -7,7 +7,7 @@
     <author>
       <name> OnlyMe </name>
       <email> snakersu@gmail.com </email>
-      <gender> m </gender>
+      <gender> Male </gender>
     </author>
   </book>
   <book>
@@ -17,7 +17,7 @@
     <author>
       <name> Meetoo </name>
       <email> sdsd@sd.ru </email>
-      <gender> m </gender>
+      <gender> Male </gender>
     </author>
   </book>
   <book>
@@ -27,7 +27,27 @@
     <author>
       <name> Some </name>
       <email> some@mail.com </email>
-      <gender> f </gender>
+      <gender> Female </gender>
+    </author>
+  </book>
+  <book>
+    <name> hjvfgh </name>
+    <quantity> 4 </quantity>
+    <price> 1.0 </price>
+    <author>
+      <name> gbnv </name>
+      <email> asda@mail.ru </email>
+      <gender> Male </gender>
+    </author>
+  </book>
+  <book>
+    <name> sad </name>
+    <quantity> 6 </quantity>
+    <price> 3.0 </price>
+    <author>
+      <name> hjvsdghf </name>
+      <email> saf@sfd.ru </email>
+      <gender> Female </gender>
     </author>
   </book>
 </books>

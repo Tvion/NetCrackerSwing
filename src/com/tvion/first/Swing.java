@@ -43,7 +43,7 @@ public class Swing extends JFrame {
         table.getColumnModel().getColumn(3).setPreferredWidth(130);
         table.getColumnModel().getColumn(4).setPreferredWidth(30);
         table.getColumnModel().getColumn(5).setPreferredWidth(30);
-
+        table.setRowHeight(20);
 
         addButton.addActionListener((event) -> {
             JDialog add = new AddDialog(this, m);
