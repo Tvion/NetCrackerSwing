@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
 
 public class AddDialog extends JDialog {
 
-    private String authorGender="Male";
+    private String authorGender = "Male";
 
     public AddDialog(JFrame frame, BookModel model) {
         super(frame, "Adding Book");
@@ -40,8 +40,8 @@ public class AddDialog extends JDialog {
         JButton addButton = new JButton("Add");
         JButton cancelButton = new JButton("Cancel");
 
-        JPanel radiusPanel= new JPanel();
-        ButtonGroup bg=new ButtonGroup();
+        JPanel radiusPanel = new JPanel();
+        ButtonGroup bg = new ButtonGroup();
         bg.add(genderFemaleButton);
         bg.add(genderMaleButton);
         radiusPanel.add(genderMaleButton);
@@ -68,13 +68,9 @@ public class AddDialog extends JDialog {
 
         genderMaleButton.setSelected(true);
 
-        genderFemaleButton.addActionListener((event)->{
-            authorGender="Female";
-        });
+        genderFemaleButton.addActionListener((event) -> authorGender = "Female");
 
-        genderMaleButton.addActionListener((event)->{
-            authorGender="Male";
-        });
+        genderMaleButton.addActionListener((event) -> authorGender = "Male");
 
         addButton.addActionListener((event) -> {
             String[] values = {name.getText(), count.getText(), price.getText(), authorName.getText(), authorEmail.getText(), authorGender};
@@ -92,8 +88,8 @@ public class AddDialog extends JDialog {
 
     public static boolean verifyValues(JDialog dialog, String[] values) {
 
-        Pattern name = Pattern.compile("^[a-zA-Z0-9]{3,25}$");
-        Pattern nameAuthor = Pattern.compile("^[a-zA-Z]{3,25}");
+        Pattern name = Pattern.compile("^[a-zA-Z0-9\\s]{3,25}$");
+        Pattern nameAuthor = Pattern.compile("^[a-zA-Z\\s]{3,25}");
         Pattern num = Pattern.compile("^[0-9]{1,10000000}$");
         Pattern price = Pattern.compile("^[0-9]{1,10000000}+\\.[0-9]{1,10000000}$");
         Pattern email = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);

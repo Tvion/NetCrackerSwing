@@ -120,7 +120,6 @@ public class Swing extends JFrame {
             }
         });
 
-
         saveAs.addActionListener((event) -> {
             JFileChooser fileChooser = new JFileChooser();
             fileChooser.setFileFilter(new FileFilter() {
@@ -148,7 +147,6 @@ public class Swing extends JFrame {
         });
 
         save.addActionListener((event) -> m.saveChanges());
-
 
         fileMenu.add(open);
         fileMenu.add(save);

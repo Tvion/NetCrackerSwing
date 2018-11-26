@@ -31,21 +31,21 @@
     </author>
   </book>
   <book>
-    <name> HappyBook </name>
+    <name> 1984 </name>
     <quantity> 4 </quantity>
     <price> 675.0 </price>
     <author>
-      <name> George </name>
+      <name> George Orwell </name>
       <email> g-orw@mail.ru </email>
       <gender> Male </gender>
     </author>
   </book>
   <book>
-    <name> StopAndRun </name>
+    <name> Stop smoking </name>
     <quantity> 6 </quantity>
     <price> 500.5 </price>
     <author>
-      <name> Alan </name>
+      <name> Alan Karr </name>
       <email> alKar@gmail.ru </email>
       <gender> Male </gender>
     </author>

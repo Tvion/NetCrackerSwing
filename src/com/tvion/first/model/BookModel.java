@@ -18,7 +18,7 @@ public class BookModel extends AbstractTableModel {
 
     private List<Book> books = new ArrayList<>();
 
-    File source = new File("Books.xml");
+    private File source = new File("Books.xml");
 
     public BookModel() {
         try {
@@ -68,7 +68,7 @@ public class BookModel extends AbstractTableModel {
     }
 
     public void saveChanges() {
-        try (PrintWriter printWriter = new PrintWriter(source);) {
+        try (PrintWriter printWriter = new PrintWriter(source)) {
             if (source.exists()) {
                 source.delete();
             }
@@ -112,8 +112,6 @@ public class BookModel extends AbstractTableModel {
                 printWriter.println(tab(tabs) + "</book>");
             });
             printWriter.print("</books>");
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -129,17 +127,28 @@ public class BookModel extends AbstractTableModel {
             String authorEmail;
             String authorGender;
             if (scanner.nextLine().equals("  <book>")) {
-                name = scanner.nextLine().split(" ")[TAB_COUNT * 2 + 1];
+                name = getNames(scanner.nextLine(), TAB_COUNT * 2 + 1);
                 quantity = Integer.parseInt(scanner.nextLine().split(" ")[TAB_COUNT * 2 + 1]);
                 price = Double.parseDouble(scanner.nextLine().split(" ")[TAB_COUNT * 2 + 1]);
                 scanner.nextLine();
-                authorName = scanner.nextLine().split(" ")[TAB_COUNT * 3 + 1];
+                authorName = getNames(scanner.nextLine(), TAB_COUNT * 3 + 1);
                 authorEmail = scanner.nextLine().split(" ")[TAB_COUNT * 3 + 1];
                 authorGender = scanner.nextLine().split(" ")[TAB_COUNT * 3 + 1];
                 books.add(new Book(name, quantity, price, new Author(authorName, authorEmail, authorGender)));
             }
         }
         fireTableDataChanged();
+    }
+
+    private String getNames(String line, int startIndex) {
+        StringBuilder result = new StringBuilder();
+        String[] substrings = line.split(" ");
+        for (int i = startIndex; i < substrings.length; i++) {
+            if ("</name>".equals(substrings[i])) break;
+            result.append(substrings[i]);
+            result.append(" ");
+        }
+        return result.toString().trim();
     }
 
     private String tab(int countTab) {
