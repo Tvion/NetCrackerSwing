@@ -8,6 +8,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 public class ExitDialog extends JDialog {
+
     private static boolean isCancel = false;
 
     public boolean isCancel() {
@@ -44,6 +45,7 @@ public class ExitDialog extends JDialog {
             isCancel = true;
             this.dispose();
         });
+
         saveButton.addActionListener((event) -> {
             model.saveChanges();
             if (isClosing) {
@@ -68,7 +70,5 @@ public class ExitDialog extends JDialog {
                 dispose();
             }
         });
-
-
     }
 }

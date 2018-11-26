@@ -186,9 +186,9 @@ public class BookModel extends AbstractTableModel {
             }
             options.createNewFile();
             printWriter.println("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>");
-            printWriter.println("  <options>");
-            printWriter.println("    <autoSave> " + autoSave + " </autoSave>");
-            printWriter.println("  </options>");
+            printWriter.println("<options>");
+            printWriter.println("  <autoSave> " + autoSave + " </autoSave>");
+            printWriter.println("</options>");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -220,10 +220,6 @@ public class BookModel extends AbstractTableModel {
 
     public boolean isChanged() {
         return isChanged;
-    }
-
-    public void setChanged(boolean changed) {
-        isChanged = changed;
     }
 
     private String tab(int countTab) {

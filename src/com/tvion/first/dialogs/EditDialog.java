@@ -12,16 +12,18 @@ public class EditDialog extends JDialog {
     private String authorGender = "Male";
 
     public EditDialog(JFrame frame, BookModel model, int selectedRow) {
-        super(frame, "Adding Book");
+        super(frame, "Editing Book");
         setSize(300, 270);
         setLocation(400, 300);
         setDefaultCloseOperation(HIDE_ON_CLOSE);
         setModal(true);
         setResizable(false);
-        JPanel panel = new JPanel(new GridLayout(0, 2, 10, 10));
-        JPanel buttons = new JPanel();
+
         Book selectedBook = model.getBook(selectedRow);
         Author author = selectedBook.getAuthor();
+
+        JPanel panel = new JPanel(new GridLayout(0, 2, 10, 10));
+        JPanel buttons = new JPanel();
         JTextField name = new JTextField(selectedBook.getName());
         JTextField authorName = new JTextField(author.getName());
         JTextField authorEmail = new JTextField(author.getEmail());
@@ -61,8 +63,10 @@ public class EditDialog extends JDialog {
         panel.add(price);
         panel.add(countL);
         panel.add(count);
+
         buttons.add(addButton);
         buttons.add(cancelButton);
+
         this.add(panel);
         this.add(buttons, BorderLayout.SOUTH);
 

@@ -17,8 +17,8 @@ import java.io.IOException;
 
 
 public class Swing extends JFrame {
-    private BookModel m = new BookModel();
 
+    private BookModel m = new BookModel();
 
     public Swing() {
         super("Book Table");
@@ -32,6 +32,7 @@ public class Swing extends JFrame {
         JButton editButton = new JButton("Edit");
         JButton deleteButton = new JButton("Delete");
         JScrollPane jScrollPane = new JScrollPane(table);
+
         setJMenuBar(menu);
         menu.add(createFileMenu());
         menu.add(createOptionsMenu());
@@ -62,6 +63,7 @@ public class Swing extends JFrame {
             JDialog edit = new EditDialog(this, m, table.getSelectedRow());
             edit.setVisible(true);
         });
+
 
         table.getSelectionModel().addListSelectionListener((event) -> {
             if (table.getSelectedRow() == -1) {
@@ -103,6 +105,7 @@ public class Swing extends JFrame {
 
         open.addActionListener((event) -> {
             JDialog changeFileDialog = new ExitDialog(m, false);
+
             if (m.isChanged() && !m.isAutoSave()) {
                 changeFileDialog.setVisible(true);
             }
@@ -110,6 +113,7 @@ public class Swing extends JFrame {
                 ((ExitDialog) changeFileDialog).setCancel(false);
                 return;
             }
+
             JFileChooser fileOpener = new JFileChooser();
             fileOpener.setFileFilter(new FileFilter() {
                 @Override
@@ -122,8 +126,9 @@ public class Swing extends JFrame {
                     return ".xml files";
                 }
             });
-            int ret = fileOpener.showDialog(this, "Открыть файл");
-            if (ret == JFileChooser.APPROVE_OPTION) {
+
+            int state = fileOpener.showDialog(this, "Open File");
+            if (state == JFileChooser.APPROVE_OPTION) {
                 try {
                     File file = fileOpener.getSelectedFile();
                     m.setSource(file);
@@ -134,8 +139,6 @@ public class Swing extends JFrame {
         });
 
         saveAs.addActionListener((event) -> {
-
-
             JFileChooser fileChooser = new JFileChooser();
             fileChooser.setFileFilter(new FileFilter() {
                 @Override
@@ -148,7 +151,9 @@ public class Swing extends JFrame {
                     return ".xml";
                 }
             });
-            if (fileChooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
+
+            int state = fileChooser.showSaveDialog(this);
+            if (state == JFileChooser.APPROVE_OPTION) {
                 try {
                     String path = fileChooser.getSelectedFile().getPath();
                     File newFile = new File(path + ".xml");
@@ -158,7 +163,6 @@ public class Swing extends JFrame {
                     e.printStackTrace();
                 }
             }
-
         });
 
         save.addActionListener((event) -> m.saveChanges());
@@ -174,24 +178,45 @@ public class Swing extends JFrame {
         JCheckBoxMenuItem autoSaveItem = new JCheckBoxMenuItem("Autosave");
 
         options.add(autoSaveItem);
-        if (m.isAutoSave())
+
+        if (m.isAutoSave()) {
             autoSaveItem.setState(true);
-        else
+            this.setTitle(this.getTitle() + " [Autosave]");
+        } else {
             autoSaveItem.setState(false);
+        }
+
         autoSaveItem.addActionListener((event) -> {
             if (m.isAutoSave()) {
                 m.setAutoSave(false);
+                this.setTitle(getStandardTitle());
             } else {
                 m.setAutoSave(true);
+                this.setTitle(this.getTitle() + " [Autosave]");
             }
         });
         return options;
     }
 
+    private String getStandardTitle() {
+        String[] newTitle = this.getTitle().split(" ");
+        StringBuilder result = new StringBuilder();
+        for (String sub : newTitle) {
+            if ("[Autosave]".equals(sub)) {
+                break;
+            }
+            result.append(sub + " ");
+        }
+        return result.toString().trim();
+    }
 
     private boolean isXml(File file) {
-        if (file == null) return false;
-        if (file.isDirectory()) return true;
+        if (file == null) {
+            return false;
+        }
+        if (file.isDirectory()) {
+            return true;
+        }
         String[] nameAndPath = file.getName().split("\\.");
         if (nameAndPath.length > 1) {
             String ext = nameAndPath[nameAndPath.length - 1];

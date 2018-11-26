@@ -17,7 +17,7 @@
     <author>
       <name> Meetoo </name>
       <email> sdsd@sd.ru </email>
-      <gender> Male </gender>
+      <gender> Female </gender>
     </author>
   </book>
   <book>
@@ -47,7 +47,7 @@
     <author>
       <name> Alan Karr </name>
       <email> alKar@gmail.ru </email>
-      <gender> Female </gender>
+      <gender> Male </gender>
     </author>
   </book>
 </books>

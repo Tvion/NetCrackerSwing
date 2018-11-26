@@ -20,6 +20,7 @@ public class AddDialog extends JDialog {
         setDefaultCloseOperation(HIDE_ON_CLOSE);
         setModal(true);
         setResizable(false);
+
         JPanel panel = new JPanel(new GridLayout(0, 2, 10, 10));
         JPanel buttons = new JPanel();
         JTextField name = new JTextField(1);
@@ -61,8 +62,10 @@ public class AddDialog extends JDialog {
         panel.add(price);
         panel.add(countL);
         panel.add(count);
+
         buttons.add(addButton);
         buttons.add(cancelButton);
+
         this.add(panel);
         this.add(buttons, BorderLayout.SOUTH);
 
