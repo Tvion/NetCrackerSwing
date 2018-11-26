@@ -8,7 +8,17 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 public class ExitDialog extends JDialog {
-    public ExitDialog(BookModel model) {
+    private static boolean isCancel = false;
+
+    public boolean isCancel() {
+        return isCancel;
+    }
+
+    public void setCancel(boolean cancel) {
+        ExitDialog.isCancel = cancel;
+    }
+
+    public ExitDialog(BookModel model, boolean isClosing) {
         setTitle("Saving");
         setSize(270, 100);
         setLocation(550, 300);
@@ -30,19 +40,35 @@ public class ExitDialog extends JDialog {
         buttons.add(notSaveButton);
         buttons.add(cancelButton);
 
-        cancelButton.addActionListener((event) -> this.dispose());
+        cancelButton.addActionListener((event) -> {
+            isCancel = true;
+            this.dispose();
+        });
         saveButton.addActionListener((event) -> {
             model.saveChanges();
-            System.exit(0);
+            if (isClosing) {
+                System.exit(0);
+            }
+            isCancel = false;
+            this.dispose();
         });
 
-        notSaveButton.addActionListener((event) -> System.exit(0));
+        notSaveButton.addActionListener((event) -> {
+            if (isClosing) {
+                System.exit(0);
+            }
+            isCancel = false;
+            this.dispose();
+        });
 
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
+                isCancel = true;
                 dispose();
             }
         });
+
+
     }
 }

@@ -19,6 +19,9 @@ public class BookModel extends AbstractTableModel {
     private List<Book> books = new ArrayList<>();
 
     private File source = new File("Books.xml");
+    private File options = new File("Options.xml");
+    private boolean autoSave;
+    private boolean isChanged;
 
     public BookModel() {
         try {
@@ -26,6 +29,8 @@ public class BookModel extends AbstractTableModel {
                 source.createNewFile();
             }
             parseSource();
+            autoSave = checkOptions();
+            isChanged = false;
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -33,6 +38,10 @@ public class BookModel extends AbstractTableModel {
 
     public void addBook(Book b) {
         books.add(b);
+        if (autoSave) {
+            saveChanges();
+        }
+        isChanged = true;
         fireTableDataChanged();
     }
 
@@ -42,6 +51,10 @@ public class BookModel extends AbstractTableModel {
 
     public void setBook(int index, Book book) {
         books.set(index, book);
+        if (autoSave) {
+            saveChanges();
+        }
+        isChanged = true;
         fireTableDataChanged();
     }
 
@@ -49,6 +62,7 @@ public class BookModel extends AbstractTableModel {
         this.source = source;
         books.clear();
         parseSource();
+        isChanged = false;
         fireTableDataChanged();
     }
 
@@ -64,6 +78,10 @@ public class BookModel extends AbstractTableModel {
         for (int i : booksNumbers)
             selectedBooks.add(books.get(i));
         books.removeAll(selectedBooks);
+        if (autoSave) {
+            saveChanges();
+        }
+        isChanged = true;
         fireTableDataChanged();
     }
 
@@ -112,12 +130,13 @@ public class BookModel extends AbstractTableModel {
                 printWriter.println(tab(tabs) + "</book>");
             });
             printWriter.print("</books>");
+            isChanged = false;
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void parseSource() throws FileNotFoundException {
+    private void parseSource() throws FileNotFoundException {
         Scanner scanner = new Scanner(source);
         while (scanner.hasNextLine()) {
             String name;
@@ -140,6 +159,41 @@ public class BookModel extends AbstractTableModel {
         fireTableDataChanged();
     }
 
+    private boolean checkOptions() {
+        try (Scanner scanner = new Scanner(options)) {
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                if (line.contains("<autoSave>")) {
+                    String[] subLines = line.split(" ");
+                    for (int i = 0; i < subLines.length; i++) {
+                        if (subLines[i].contains("<autoSave>")) {
+                            return Boolean.parseBoolean(subLines[i + 1]);
+                        }
+                    }
+                }
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+
+    private void saveOptions() {
+        try (PrintWriter printWriter = new PrintWriter(options)) {
+            if (options.exists()) {
+                options.delete();
+            }
+            options.createNewFile();
+            printWriter.println("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>");
+            printWriter.println("  <options>");
+            printWriter.println("    <autoSave> " + autoSave + " </autoSave>");
+            printWriter.println("  </options>");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     private String getNames(String line, int startIndex) {
         StringBuilder result = new StringBuilder();
         String[] substrings = line.split(" ");
@@ -149,6 +203,27 @@ public class BookModel extends AbstractTableModel {
             result.append(" ");
         }
         return result.toString().trim();
+    }
+
+    public boolean isAutoSave() {
+        return autoSave;
+    }
+
+    public void setAutoSave(boolean autoSave) {
+        this.autoSave = autoSave;
+        if (autoSave) {
+            saveChanges();
+        }
+        isChanged = false;
+        saveOptions();
+    }
+
+    public boolean isChanged() {
+        return isChanged;
+    }
+
+    public void setChanged(boolean changed) {
+        isChanged = changed;
     }
 
     private String tab(int countTab) {

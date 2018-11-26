@@ -19,6 +19,7 @@ import java.io.IOException;
 public class Swing extends JFrame {
     private BookModel m = new BookModel();
 
+
     public Swing() {
         super("Book Table");
         setSize(550, 350);
@@ -32,7 +33,8 @@ public class Swing extends JFrame {
         JButton deleteButton = new JButton("Delete");
         JScrollPane jScrollPane = new JScrollPane(table);
         setJMenuBar(menu);
-        menu.add(createMenu());
+        menu.add(createFileMenu());
+        menu.add(createOptionsMenu());
 
         add(jScrollPane, BorderLayout.CENTER);
         add(buttons, BorderLayout.SOUTH);
@@ -79,9 +81,12 @@ public class Swing extends JFrame {
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-
-                JDialog exitDialog = new ExitDialog(m);
-                exitDialog.setVisible(true);
+                if (!m.isAutoSave() && m.isChanged()) {
+                    JDialog exitDialog = new ExitDialog(m, true);
+                    exitDialog.setVisible(true);
+                } else {
+                    System.exit(0);
+                }
             }
         });
 
@@ -89,7 +94,7 @@ public class Swing extends JFrame {
     }
 
 
-    private JMenu createMenu() {
+    private JMenu createFileMenu() {
         JMenu fileMenu = new JMenu("File");
         JMenuItem open = new JMenuItem("Open");
         JMenuItem save = new JMenuItem("Save");
@@ -97,6 +102,14 @@ public class Swing extends JFrame {
 
 
         open.addActionListener((event) -> {
+            JDialog changeFileDialog = new ExitDialog(m, false);
+            if (m.isChanged() && !m.isAutoSave()) {
+                changeFileDialog.setVisible(true);
+            }
+            if (((ExitDialog) changeFileDialog).isCancel()) {
+                ((ExitDialog) changeFileDialog).setCancel(false);
+                return;
+            }
             JFileChooser fileOpener = new JFileChooser();
             fileOpener.setFileFilter(new FileFilter() {
                 @Override
@@ -121,6 +134,8 @@ public class Swing extends JFrame {
         });
 
         saveAs.addActionListener((event) -> {
+
+
             JFileChooser fileChooser = new JFileChooser();
             fileChooser.setFileFilter(new FileFilter() {
                 @Override
@@ -153,6 +168,26 @@ public class Swing extends JFrame {
         fileMenu.add(saveAs);
         return fileMenu;
     }
+
+    private JMenu createOptionsMenu() {
+        JMenu options = new JMenu("Options");
+        JCheckBoxMenuItem autoSaveItem = new JCheckBoxMenuItem("Autosave");
+
+        options.add(autoSaveItem);
+        if (m.isAutoSave())
+            autoSaveItem.setState(true);
+        else
+            autoSaveItem.setState(false);
+        autoSaveItem.addActionListener((event) -> {
+            if (m.isAutoSave()) {
+                m.setAutoSave(false);
+            } else {
+                m.setAutoSave(true);
+            }
+        });
+        return options;
+    }
+
 
     private boolean isXml(File file) {
         if (file == null) return false;
