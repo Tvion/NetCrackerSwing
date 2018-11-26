@@ -2,25 +2,28 @@ package com.tvion.first;
 
 import com.tvion.first.dialogs.AddDialog;
 import com.tvion.first.dialogs.EditDialog;
+import com.tvion.first.dialogs.ExitDialog;
 import com.tvion.first.dialogs.RemoveDialog;
 import com.tvion.first.model.BookModel;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
 
 public class Swing extends JFrame {
-    BookModel m = new BookModel();
+    private BookModel m = new BookModel();
 
     public Swing() {
         super("Book Table");
         setSize(550, 350);
         setLocation(350, 250);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultCloseOperation(0);
         JTable table = new JTable(m);
         JPanel buttons = new JPanel();
         JMenuBar menu = new JMenuBar();
@@ -72,6 +75,16 @@ public class Swing extends JFrame {
                 deleteButton.setEnabled(true);
             }
         });
+
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+
+                JDialog exitDialog = new ExitDialog(m);
+                exitDialog.setVisible(true);
+            }
+        });
+
         setVisible(true);
     }
 
@@ -134,9 +147,7 @@ public class Swing extends JFrame {
 
         });
 
-        save.addActionListener((event) -> {
-            m.saveChanges();
-        });
+        save.addActionListener((event) -> m.saveChanges());
 
 
         fileMenu.add(open);
@@ -145,21 +156,19 @@ public class Swing extends JFrame {
         return fileMenu;
     }
 
-    public boolean isXml(File file) {
+    private boolean isXml(File file) {
         if (file == null) return false;
         if (file.isDirectory()) return true;
         String[] nameAndPath = file.getName().split("\\.");
         if (nameAndPath.length > 1) {
             String ext = nameAndPath[nameAndPath.length - 1];
-            if ("xml".equals(ext.toLowerCase())) {
-                return true;
-            }
+            return "xml".equals(ext.toLowerCase());
         }
         return false;
     }
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> new Swing());
+        SwingUtilities.invokeLater(Swing::new);
     }
 }
 
