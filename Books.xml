@@ -31,7 +31,7 @@
     </author>
   </book>
   <book>
-    <name> 1984 </name>
+    <name> HappyBook </name>
     <quantity> 4 </quantity>
     <price> 675.0 </price>
     <author>
@@ -41,7 +41,7 @@
     </author>
   </book>
   <book>
-    <name> Stop smoking </name>
+    <name> StopAndRun </name>
     <quantity> 6 </quantity>
     <price> 500.5 </price>
     <author>

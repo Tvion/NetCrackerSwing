@@ -37,7 +37,7 @@ public class EditDialog extends JDialog {
         JLabel countL = new JLabel("Count");
         JLabel maleL = new JLabel("Male");
         JLabel femaleL = new JLabel("Female");
-        JButton addButton = new JButton("Add");
+        JButton addButton = new JButton("Edit");
         JButton cancelButton = new JButton("Cancel");
 
         JPanel buttonsPanel = new JPanel();
