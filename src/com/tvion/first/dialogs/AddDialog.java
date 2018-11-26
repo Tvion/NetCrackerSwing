@@ -77,7 +77,7 @@ public class AddDialog extends JDialog {
         });
 
         addButton.addActionListener((event) -> {
-            String[] values = {name.getText().trim(), count.getText(), price.getText(), authorName.getText().trim(), authorEmail.getText(), authorGender};
+            String[] values = {name.getText(), count.getText(), price.getText(), authorName.getText(), authorEmail.getText(), authorGender};
             if (verifyValues(this, values)) addBook(model, values);
         });
         cancelButton.addActionListener((event) -> this.dispose());
